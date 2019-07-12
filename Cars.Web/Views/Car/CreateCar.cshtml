@@ -1,0 +1,88 @@
+﻿@model CreateCarViewModel
+@{
+    ViewData["Title"] = "CreateCar";
+}
+
+<form method="post" enctype="multipart/form-data">
+
+    <select id="MakeId" asp-for="MakeId" asp-items='@(new SelectList(ViewBag.Makes,"MakeId","NameOfMake"))'>
+        <option>Select Make</option>
+    </select>
+
+    <select id="ModelId" asp-for="ModelId" asp-items='@(new SelectList(string.Empty,"ModelId","NameOfModel"))'></select>
+
+
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script>
+        $(function () {
+            $("#MakeId").change(function () {
+
+                var url = "/Car/GetModels";
+                var ddlsource = "#MakeId";
+                $.getJSON(url, { MakeId: $(ddlsource).val() }, function (data) {
+                    var items = '';
+                    $("#ModelId").empty();
+                    $.each(data, function (i, row) {
+                        items += "<option value='" + row.value + "'>" + row.text + "</option>";
+                    });
+                    $("#ModelId").html(items);
+                })
+            });
+        });
+    </script>
+
+    <div
+    <label asp-for="Price"></label>
+  <input asp-for="Price" />
+    </div>
+    <div
+    <label asp-for="TypeOfEngine">Type of Engine</label>
+    <select asp-for="TypeOfEngine">
+        <option value="Benzin">Benzin</option>
+        <option value="Diesel">Diesel</option>
+        <option value="Hybrid">Hybrid</option>
+
+    </select>
+    </div>
+
+    <div
+    <label asp-for="Category">Category</label>
+    <select asp-for="Category">
+        <option value="Coupe">Sport Coupe</option>
+        <option value="Limousine">Limousine</option>
+        <option value="Cabrio">Cabrio</option>
+        <option value="Van">Van</option>
+        <option value="Jeep">Jeep</option>
+
+    </select>
+    </div>
+
+    
+
+    <div
+    <label asp-for="TypeOfGearbox">Type Of Gearbox</label>
+    <select asp-for="TypeOfGearbox">
+        <option value="Automatic">Automatic</option>
+        <option value="Manual">Manual</option>
+        
+
+    </select>
+    </div>
+
+    <div
+    <label asp-for="HorsePower"></label>
+  <input asp-for="HorsePower" />
+    </div>
+    <div
+    <label asp-for="YearOfBuilding"></label>
+  <input asp-for="YearOfBuilding" />
+    </div>
+
+    <label asp-for="Description"></label>
+    <textarea asp-for="Description"> </textarea>
+
+    <input type="submit" value="Create" />
+
+</form>
+

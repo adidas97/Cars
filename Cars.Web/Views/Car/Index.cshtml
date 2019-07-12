@@ -1,0 +1,59 @@
+﻿
+
+@using Cars.Data.Models
+@model List<Car>
+
+@{
+    ViewData["Title"] = "Cars";
+}
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                Make
+            </th>
+            <th>
+                Model
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Year
+            </th>
+            <th>
+                Option
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <th>
+
+                    @item.Make.NameOfMake
+                </th>
+                <th>
+                    @item.Model.NameOfModel
+                </th>
+                <th>
+                    @item.Price
+                </th>
+                <th>
+                    @item.YearOfBuilding
+                </th>
+
+                <th>
+                    <a href="/car/details/@item.Id">Check</a>
+                    <a href="/car/editbyid/@item.Id" class="btn-warning">Edit</a>
+                    <a href="/car/destroy/@item.Id" class="btn-danger">Delete</a>
+                </th>
+            </tr>
+        }
+    </tbody>
+
+</table>
